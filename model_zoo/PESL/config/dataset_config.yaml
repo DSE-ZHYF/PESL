@@ -1,0 +1,50 @@
+amazon_new:
+    data_root: ../../data/ ###
+    data_format: csv
+    train_data: ../../data/amazon_new/train_sample.csv ### 训练集位置
+    valid_data: ../../data/amazon_new/valid_sample.csv ### 验证集位置
+    test_data: ../../data/amazon_new/test_sample.csv   ### 测试集位置
+    min_categr_count: 1
+    feature_cols:
+        [{name: ['UserID'], active: True, dtype: str, type: categorical, source: user}, # UserID组
+         {name: ['click_seq'], active: True, dtype: str, type: sequence, source: user, splitter: ' ', padding_idx: 0, max_len: 200, feature_encoder: 'layers.DoNothing()'}, # UserID组序列
+         {name: ['ItemID','MainCategory','Store'], active: True, dtype: str, type: categorical, source: item}, # Item 单值Cate组
+         {name: ['Categories'], active: True, dtype: str, type: categorical, splitter: ' ', padding_idx: 0, source: item}, # Item 多值Cate组
+         {name: ['AverageRating', 'Price'], active: True, dtype: float, type: numeric, normalizer: MinMaxScaler, source: item}, # Item 数值组
+         {name: ['timestamp'], active: True, dtype: float, type: numeric, normalizer: MinMaxScaler, source: context}, # Inter 上下文组
+         ] 
+    label_col: {name: labels, dtype: float}
+    
+douban_new:
+    data_root: ../../data/ ###
+    data_format: csv
+    train_data: ../../data/douban_new/train_sample.csv ### 训练集位置
+    valid_data: ../../data/douban_new/valid_sample.csv ### 验证集位置
+    test_data: ../../data/douban_new/test_sample.csv   ### 测试集位置
+    min_categr_count: 1
+    feature_cols:
+        [{name: ['UserID'], active: True, dtype: str, type: categorical, source: user}, # UserID组
+         {name: ['click_seq'], active: True, dtype: str, type: sequence, source: user, splitter: ' ', padding_idx: 0, max_len: 200, feature_encoder: 'layers.DoNothing()'}, # UserID组序列
+         {name: ['ItemID','OFFICIAL_SITE','YEAR', 'RELEASE_YEAR', 'RELEASE_MONTH'], active: True, dtype: str, type: categorical, source: item}, # Item 单值Cate组
+         {name: ['ACTORS','DIRECTORS','LANGUAGES','REGIONS','TAGS','GENRES'], active: True, dtype: str, type: categorical, splitter: ' ', source: item}, # Item 多值Cate组
+         {name: ['DOUBAN_SCORE','DOUBAN_VOTES','MINS'], active: True, dtype: float, type: numeric, normalizer: MinMaxScaler, source: item}, # Item 数值组
+         {name: ['timestamp'], active: True, dtype: float, type: numeric, normalizer: MinMaxScaler, source: context}, # Inter 上下文组
+         ] 
+    label_col: {name: labels, dtype: float}
+
+ml10m_new:
+    data_root: ../../data/ ###
+    data_format: csv
+    train_data: ../../data/ml10m_new/train_sample.csv ### 训练集位置
+    valid_data: ../../data/ml10m_new/valid_sample.csv ### 验证集位置
+    test_data: ../../data/ml10m_new/test_sample.csv   ### 测试集位置
+    min_categr_count: 1
+    feature_cols:
+        [{name: ['UserID'], active: True, dtype: str, type: categorical, source: user}, # UserID组
+         {name: ['click_seq'], active: True, dtype: str, type: sequence, source: user, splitter: ' ', padding_idx: 0, max_len: 200, feature_encoder: 'layers.DoNothing()'}, # UserID组序列
+         {name: ['ItemID','release_year'], active: True, dtype: str, type: categorical, source: item}, # Item 单值Cate组
+         {name: ['movie_title','genre'], active: True, dtype: str, type: categorical, splitter: ' ', source: item, max_len: 20}, # Item 多值Cate组
+         {name: ['timestamp'], active: True, dtype: float, type: numeric, normalizer: MinMaxScaler, source: context}, # Inter 上下文组
+         ] 
+    label_col: {name: labels, dtype: float}
+    

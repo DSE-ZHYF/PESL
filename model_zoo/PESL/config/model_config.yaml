@@ -1,0 +1,66 @@
+Base:
+    model_root: './checkpoints/'
+    num_workers: 8
+    verbose: 1
+    early_stop_patience: 5
+    pickle_feature_encoder: True
+    save_best_only: True
+    eval_steps: null
+    debug_mode: False
+    group_id: null
+    use_features: null
+    feature_specs: null
+    feature_config: null
+    
+PESL_new_douban_CosineSim_deeper_reg00005: # config名称，对应主文件的experiment_id, 不同模型适用的参数集合是有差异的
+    model: PESL_CosineSim_deeper # 模型名称，对应model_zoo的子文件夹
+    dataset_id: douban_new # 数据集配置名称，对应./dataset_config.yaml的主键
+    loss: 'bce+ccl_0.0005_0.0'
+    metrics: ['logloss', 'AUC']
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.e-3
+    net_dropout: 0.0
+    batch_size: 1024
+    embedding_dim: 16
+    epochs: 50 ### 训练轮数
+    shuffle: False
+    seed: 2000
+    monitor: {'AUC': 1, 'logloss': -1}
+    monitor_mode: 'max'   
+
+PESL_new_amazon_CosineSim_deeper_reg0003: # config名称，对应主文件的experiment_id, 不同模型适用的参数集合是有差异的
+    model: PESL_CosineSim_deeper # 模型名称，对应model_zoo的子文件夹
+    dataset_id: amazon_new # 数据集配置名称，对应./dataset_config.yaml的主键
+    loss: 'bce+ccl_0.003_0.0'
+    metrics: ['logloss', 'AUC']
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.e-3
+    net_dropout: 0.0
+    batch_size: 1024
+    embedding_dim: 16
+    epochs: 50 ### 训练轮数
+    shuffle: False
+    seed: 2000
+    monitor: {'AUC': 1, 'logloss': -1}
+    monitor_mode: 'max'   
+
+PESL_new_ml10m_CosineSim_deeper_reg001: # config名称，对应主文件的experiment_id, 不同模型适用的参数集合是有差异的
+    model: PESL_CosineSim_deeper # 模型名称，对应model_zoo的子文件夹
+    dataset_id: ml10m_new # 数据集配置名称，对应./dataset_config.yaml的主键
+    loss: 'bce+ccl_0.01_0.0'
+    metrics: ['logloss', 'AUC']
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.e-3
+    net_dropout: 0.0
+    batch_size: 1024
+    embedding_dim: 16
+    epochs: 50 ### 训练轮数
+    shuffle: False
+    seed: 2000
+    monitor: {'AUC': 1, 'logloss': -1}
+    monitor_mode: 'max'
+
+      
